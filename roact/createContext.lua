@@ -1,8 +1,14 @@
-local Symbol = require(script.Parent.Symbol)
-local createFragment = require(script.Parent.createFragment)
-local createSignal = require(script.Parent.createSignal)
-local Children = require(script.Parent.PropMarkers.Children)
-local Component = require(script.Parent.Component)
+local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
+local function import(dir, path)
+	return loadstring(game:HttpGet(dir .. "/" .. path))()
+end
+
+local Symbol = import(dir, "Symbol.lua")
+local createFragment = import(dir, "createFragment.lua")
+local createSignal = import(dir, "createSignal.lua")
+local Children = import(dir, "PropMarkers/Children.lua")
+local Component = import(dir, "Component.lua")
+
 
 --[[
 	Construct the value that is assigned to Roact's context storage.

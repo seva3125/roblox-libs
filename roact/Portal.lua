@@ -1,4 +1,8 @@
-local Symbol = require(script.Parent.Symbol)
+local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
+local function import(dir,path)
+	return loadstring(game:HttpGet(dir .. "/" .. path))()
+end
+local Symbol = import(dir, "Symbol.lua")()
 
 local Portal = Symbol.named("Portal")
 

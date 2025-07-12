@@ -1,4 +1,10 @@
-local None = require(script.Parent.None)
+local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
+local function import(dir, path)
+	return loadstring(game:HttpGet(dir .. "/" .. path))()
+end
+
+local None = import(dir, "None.lua")
+
 
 --[[
 	Merges values from zero or more tables onto a target table. If a value is

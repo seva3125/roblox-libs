@@ -1,12 +1,18 @@
 --!nonstrict
-local Type = require(script.Parent.Type)
-local ElementKind = require(script.Parent.ElementKind)
-local ElementUtils = require(script.Parent.ElementUtils)
-local Children = require(script.Parent.PropMarkers.Children)
-local Symbol = require(script.Parent.Symbol)
-local internalAssert = require(script.Parent.internalAssert)
+local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
+local function import(dir, path)
+	return loadstring(game:HttpGet(dir .. "/" .. path))()
+end
 
-local config = require(script.Parent.GlobalConfig).get()
+local Type = import(dir, "Type.lua")
+local ElementKind = import(dir, "ElementKind.lua")
+local ElementUtils = import(dir, "ElementUtils.lua")
+local Children = import(dir, "PropMarkers/Children.lua")
+local Symbol = import(dir, "Symbol.lua")
+local internalAssert = import(dir, "internalAssert.lua")
+
+local config = import(dir, "GlobalConfig.lua").get()
+
 
 local InternalData = Symbol.named("InternalData")
 

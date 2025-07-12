@@ -5,7 +5,12 @@
 	The indentation may seem odd, but it's necessary to avoid introducing extra
 	whitespace into the error messages themselves.
 ]]
-local ComponentLifecyclePhase = require(script.Parent.ComponentLifecyclePhase)
+local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
+local function import(dir,path)
+	return loadstring(game:HttpGet(dir .. "/" .. path))()
+end
+
+local ComponentLifecyclePhase = import(dir, "ComponentLifecyclePhase.lua")
 
 local invalidSetStateMessages = {}
 

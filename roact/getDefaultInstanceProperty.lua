@@ -7,8 +7,12 @@
 	Eventually, Roblox might provide a nicer API to query the default property
 	of an object without constructing an instance of it.
 ]]
+local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
+local function import(dir,path)
+	return loadstring(game:HttpGet(dir .. "/" .. path))()
+end
+local Symbol = import(dir, "Symbol.lua")
 
-local Symbol = require(script.Parent.Symbol)
 
 local Nil = Symbol.named("Nil")
 local _cachedPropertyValues = {}

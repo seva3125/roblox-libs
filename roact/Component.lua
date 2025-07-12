@@ -1,11 +1,17 @@
-local assign = require(script.Parent.assign)
-local ComponentLifecyclePhase = require(script.Parent.ComponentLifecyclePhase)
-local Type = require(script.Parent.Type)
-local Symbol = require(script.Parent.Symbol)
-local invalidSetStateMessages = require(script.Parent.invalidSetStateMessages)
-local internalAssert = require(script.Parent.internalAssert)
+local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
+local function import(dir, path)
+	return loadstring(game:HttpGet(dir .. "/" .. path))()
+end
 
-local config = require(script.Parent.GlobalConfig).get()
+local assign = import(dir, "assign.lua")
+local ComponentLifecyclePhase = import(dir, "ComponentLifecyclePhase.lua")
+local Type = import(dir, "Type.lua")
+local Symbol = import(dir, "Symbol.lua")
+local invalidSetStateMessages = import(dir, "invalidSetStateMessages.lua")
+local internalAssert = import(dir, "internalAssert.lua")
+
+local config = import(dir, "GlobalConfig.lua").get()
+
 
 --[[
 	Calling setState during certain lifecycle allowed methods has the potential

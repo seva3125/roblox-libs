@@ -3,17 +3,20 @@
 	well-supported renderer after NoopRenderer and is currently the only
 	renderer that does anything.
 ]]
+local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
+local function import(dir,path)
+	return loadstring(game:HttpGet(dir .. "/" .. path))()
+end
+local Binding = import(dir, "Binding.lua")
+local Children = import(dir, "PropMarkers/Children.lua")
+local ElementKind = import(dir, "ElementKind.lua")
+local SingleEventManager = import(dir, "SingleEventManager.lua")
+local getDefaultInstanceProperty = import(dir, "getDefaultInstanceProperty.lua")
+local Ref = import(dir, "PropMarkers/Ref.lua")
+local Type = import(dir, "Type.lua")
+local internalAssert = import(dir, "internalAssert.lua")
 
-local Binding = require(script.Parent.Binding)
-local Children = require(script.Parent.PropMarkers.Children)
-local ElementKind = require(script.Parent.ElementKind)
-local SingleEventManager = require(script.Parent.SingleEventManager)
-local getDefaultInstanceProperty = require(script.Parent.getDefaultInstanceProperty)
-local Ref = require(script.Parent.PropMarkers.Ref)
-local Type = require(script.Parent.Type)
-local internalAssert = require(script.Parent.internalAssert)
-
-local config = require(script.Parent.GlobalConfig).get()
+local config = import(dir, "GlobalConfig.lua").get()
 
 local applyPropsError = [[
 Error applying props:

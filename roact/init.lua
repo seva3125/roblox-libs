@@ -2,35 +2,38 @@
 --[[
 	Packages up the internals of Roact and exposes a public API for it.
 ]]
-
-local GlobalConfig = require(script.GlobalConfig)
-local createReconciler = require(script.createReconciler)
-local createReconcilerCompat = require(script.createReconcilerCompat)
-local RobloxRenderer = require(script.RobloxRenderer)
-local strict = require(script.strict)
-local Binding = require(script.Binding)
+local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
+local function import(dir,path)
+	return loadstring(game:HttpGet(dir .. "/" .. path))()
+end
+local GlobalConfig = import(dir, "GlobalConfig.lua")
+local createReconciler = import(dir, "createReconciler.lua")
+local createReconcilerCompat = import(dir, "createReconcilerCompat.lua")
+local RobloxRenderer = import(dir, "RobloxRenderer.lua")
+local strict = import(dir, "strict.lua")
+local Binding = import(dir, "Binding.lua")
 
 local robloxReconciler = createReconciler(RobloxRenderer)
 local reconcilerCompat = createReconcilerCompat(robloxReconciler)
 
 local Roact = strict({
-	Component = require(script.Component),
-	createElement = require(script.createElement),
-	createFragment = require(script.createFragment),
-	oneChild = require(script.oneChild),
-	PureComponent = require(script.PureComponent),
-	None = require(script.None),
-	Portal = require(script.Portal),
-	createRef = require(script.createRef),
-	forwardRef = require(script.forwardRef),
+	Component = import(dir, "Component.lua"),
+	createElement = import(dir, "createElement.lua"),
+	createFragment = import(dir, "createFragment.lua"),
+	oneChild = import(dir, "oneChild.lua"),
+	PureComponent = import(dir, "PureComponent.lua"),
+	None = import(dir, "None.lua"),
+	Portal = import(dir, "Portal.lua"),
+	createRef = import(dir, "createRef.lua"),
+	forwardRef = import(dir, "forwardRef.lua"),
 	createBinding = Binding.create,
 	joinBindings = Binding.join,
-	createContext = require(script.createContext),
+	createContext = import(dir, "createContext.lua"),
 
-	Change = require(script.PropMarkers.Change),
-	Children = require(script.PropMarkers.Children),
-	Event = require(script.PropMarkers.Event),
-	Ref = require(script.PropMarkers.Ref),
+	Change = import(dir, "PropMarkers/Change.lua"),
+	Children = import(dir, "PropMarkers/Children.lua"),
+	Event = import(dir, "PropMarkers/Event.lua"),
+	Ref = import(dir, "PropMarkers/Ref.lua"),
 
 	mount = robloxReconciler.mountVirtualTree,
 	unmount = robloxReconciler.unmountVirtualTree,
@@ -47,3 +50,4 @@ local Roact = strict({
 })
 
 return Roact
+

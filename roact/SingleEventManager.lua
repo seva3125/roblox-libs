@@ -1,8 +1,11 @@
 --[[
 	A manager for a single host virtual node's connected events.
 ]]
-
-local Logging = require(script.Parent.Logging)
+local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
+local function import(dir,path)
+	return loadstring(game:HttpGet(dir .. "/" .. path))()
+end
+local Logging = import(dir,"Logging.lua")
 
 local CHANGE_PREFIX = "Change."
 

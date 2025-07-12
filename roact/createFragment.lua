@@ -1,5 +1,11 @@
-local ElementKind = require(script.Parent.ElementKind)
-local Type = require(script.Parent.Type)
+local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
+local function import(dir, path)
+	return loadstring(game:HttpGet(dir .. "/" .. path))()
+end
+
+local ElementKind = import(dir, "ElementKind.lua")
+local Type = import(dir, "Type.lua")
+
 
 local function createFragment(elements)
 	return {

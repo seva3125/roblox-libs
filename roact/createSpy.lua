@@ -5,8 +5,12 @@
 
 	This should only be used in tests.
 ]]
+local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
+local function import(dir,path)
+	return loadstring(game:HttpGet(dir .. "/" .. path))()
+end
+local assertDeepEqual = import(dir, "assertDeepEqual.lua")
 
-local assertDeepEqual = require(script.Parent.assertDeepEqual)
 
 local function createSpy(inner)
 	local self = {}

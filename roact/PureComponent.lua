@@ -2,8 +2,11 @@
 	A version of Component with a `shouldUpdate` method that forces the
 	resulting component to be pure.
 ]]
-
-local Component = require(script.Parent.Component)
+local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
+local function import(dir,path)
+	return loadstring(game:HttpGet(dir .. "/" .. path))()
+end
+local Component = import(dir, "Component.lua")
 
 local PureComponent = Component:extend("PureComponent")
 
