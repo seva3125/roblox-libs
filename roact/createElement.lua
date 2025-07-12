@@ -1,15 +1,9 @@
-local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
-local function import(dir, path)
-	return loadstring(game:HttpGet(dir .. "/" .. path))()
-end
+local Children = require(script.Parent.PropMarkers.Children)
+local ElementKind = require(script.Parent.ElementKind)
+local Logging = require(script.Parent.Logging)
+local Type = require(script.Parent.Type)
 
-local Children = import(dir, "PropMarkers/Children.lua")
-local ElementKind = import(dir, "ElementKind.lua")
-local Logging = import(dir, "Logging.lua")
-local Type = import(dir, "Type.lua")
-
-local config = import(dir, "GlobalConfig.lua").get()
-
+local config = require(script.Parent.GlobalConfig).get()
 
 local multipleChildrenMessage = [[
 The prop `Roact.Children` was defined but was overridden by the third parameter to createElement!

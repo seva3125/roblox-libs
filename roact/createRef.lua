@@ -2,13 +2,7 @@
 	A ref is nothing more than a binding with a special field 'current'
 	that maps to the getValue method of the binding
 ]]
-local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
-local function import(dir, path)
-	return loadstring(game:HttpGet(dir .. "/" .. path))()
-end
-
-local Binding = import(dir, "Binding.lua")
-
+local Binding = require(script.Parent.Binding)
 
 local function createRef()
 	local binding, _ = Binding.create(nil)

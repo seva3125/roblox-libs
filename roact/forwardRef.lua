@@ -1,12 +1,8 @@
-local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
-local function import(dir,path)
-	return loadstring(game:HttpGet(dir .. "/" .. path))()
-end
-local assign = import(dir, "assign.lua")
-local None = import(dir, "None.lua")
-local Ref = import(dir, "PropMarkers/Ref.lua")
+local assign = require(script.Parent.assign)
+local None = require(script.Parent.None)
+local Ref = require(script.Parent.PropMarkers.Ref)
 
-local config = import(dir, "GlobalConfig.lua").get()
+local config = require(script.Parent.GlobalConfig).get()
 
 local excludeRef = {
 	[Ref] = None,
