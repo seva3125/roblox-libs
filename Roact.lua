@@ -615,7 +615,7 @@ local function oneChild(children)
 	local after = next(children, key)
 
 	if after then
-		error("Expected at most child, had more than one child.", 2)
+		error("Expected at most one child, had more than one.", 2)
 	end
 
 	return child
@@ -1184,7 +1184,7 @@ end
 
 function Component:setState(mapState)
 	if config.typeChecks then
-		assert(Type.of(self) == Type.StatefulComponentInstance, "Invalid `self` argument to `extend`.")
+		assert(Type.of(self) == Type.StatefulComponentInstance, "Invalid `self` argument to `setState`.")
 	end
 
 	local internalData = self[InternalData]
@@ -1667,45 +1667,6 @@ local function createElement(component, props, children)
 
 	return element
 end
-
----------------------------------------------------------------------------
-
-local ElementKind = newproxy(true)
-
-local ElementKindInternal = {
-	Portal = Symbol.named("Portal"),
-	Host = Symbol.named("Host"),
-	Function = Symbol.named("Function"),
-	Stateful = Symbol.named("Stateful"),
-	Fragment = Symbol.named("Fragment"),
-}
-
-function ElementKindInternal.of(value)
-	if typeof(value) ~= "table" then
-		return nil
-	end
-
-	return value[ElementKind]
-end
-
-local componentTypesToKinds = {
-	["string"] = ElementKindInternal.Host,
-	["function"] = ElementKindInternal.Function,
-	["table"] = ElementKindInternal.Stateful,
-}
-
-function ElementKindInternal.fromComponent(component)
-	if component == Portal then
-		return ElementKind.Portal
-	else
-		return componentTypesToKinds[typeof(component)]
-	end
-end
-
-getmetatable(ElementKind).__index = ElementKindInternal
-
-strict(ElementKindInternal, "ElementKind")
-
 
 ---------------------------------------------------------------------------
 
@@ -2520,7 +2481,7 @@ local function createReconciler(renderer)
 		local internalData = tree[InternalData]
 		if config.typeChecks then
 			assert(Type.of(tree) == Type.VirtualTree, "Expected arg #1 to be a Roact handle")
-			assert(internalData.mounted, "Cannot unmounted a Roact tree that has already been unmounted")
+			assert(internalData.mounted, "Cannot unmount a Roact tree that has already been unmounted")
 		end
 
 		internalData.mounted = false

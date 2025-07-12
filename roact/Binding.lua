@@ -1,14 +1,8 @@
-local dir = "https://raw.githubusercontent.com/seva3125/roblox-libs/refs/heads/main/roact"
-local function import(dir, path)
-	return loadstring(game:HttpGet(dir .. "/" .. path))()
-end
+local createSignal = require(script.Parent.createSignal)
+local Symbol = require(script.Parent.Symbol)
+local Type = require(script.Parent.Type)
 
-local createSignal = import(dir, "createSignal.lua")
-local Symbol = import(dir, "Symbol.lua")
-local Type = import(dir, "Type.lua")
-
-local config = import(dir, "GlobalConfig.lua").get()
-
+local config = require(script.Parent.GlobalConfig).get()
 
 local BindingImpl = Symbol.named("BindingImpl")
 
